@@ -1,3 +1,5 @@
 Pillow==5.4.1
 PySimpleGUI==3.24.0
-PySimpleGUIQt==0.22.0
+PySimpleGUIWeb==0.7.0
+PySimpleGUIWx==0.7.0
+remi==2018.12
