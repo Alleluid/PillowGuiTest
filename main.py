@@ -8,7 +8,7 @@ def main():
     img_data = image_handling.processing(source_filename)
     layout = [
         [sg.Image(data=img_data, key="_IMG_")],
-        [sg.Exit()]
+        [sg.Button("Open"), sg.Exit()]
     ]
     window = sg.Window("My Image Window").Layout(layout)
 
@@ -16,6 +16,10 @@ def main():
         event, other = window.Read()
         if event is None or event == 'Exit':
             break
+        elif event == 'Open':
+            event, (source_filename,) = get_image_gui()
+            img_data = image_handling.processing(source_filename)
+            window.FindElement("_IMG_").Update(data=img_data)
     window.Close()
 
 
@@ -26,7 +30,11 @@ def get_image_gui():
         [sg.Submit(), sg.Exit()]
     ]
 
-    return sg.Window("Open Image").Layout(layout).Read()
+    window = sg.Window("Open Image")
+    read = window.Layout(layout).Read()
+    window.Close()
+    return read
+
 
 
 if __name__ == '__main__':
