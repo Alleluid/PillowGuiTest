@@ -1,6 +1,6 @@
 import io
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 
 def processing(filename: str):
@@ -21,6 +21,13 @@ def processing(filename: str):
         print(f"multi was {multi}")
         print(f"image size is now {new_x}, {new_y}")
         img_modded = img_modded.resize((new_x, new_y), Image.NEAREST)
+
+    draw = ImageDraw.Draw(img_modded)
+    ix, iy = img_modded.size
+    draw.ellipse(
+        (ix // 2, iy // 2),
+        width=1
+    )
 
     img_modded.save(bio, format="PNG")
     return bio.getvalue()
